@@ -1,0 +1,30 @@
+
+name: build mele-a200 image
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Run a multi-line script
+        run: |
+          git clone --depth=1 --branch=main https://github.com/armbian/build 
+          cd build
+          
+          cat <<EOF > ./config/boards/mele-a200.conf
+          BOARD_NAME="Mele A200"
+          BOARDFAMILY="sun5i"
+          BOARD_MAINTAINER=""
+          HAS_VIDEO_OUTPUT="yes"
+          BOOTCONFIG="A10s-OLinuXino-M_defconfig"
+          KERNEL_TARGET="current,edge"
+          EOF
+
+          ./compile.sh build BOARD=mele-a200 BRANCH=current BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=jammy
