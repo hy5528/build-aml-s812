@@ -13,12 +13,13 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Run a multi-line script
+      - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=main https://github.com/armbian/build 
-          cd build
-          
-          cat <<EOF > ./config/boards/mele-a200.conf
+          git clone --depth=1 --branch=v23.05.2 https://github.com/armbian/build 
+
+      - name: Patch Mele A200
+        run: |          
+          cat <<EOF > ./build/config/boards/mele-a200.conf
           BOARD_NAME="Mele A200"
           BOARDFAMILY="sun5i"
           BOARD_MAINTAINER=""
@@ -27,4 +28,13 @@ jobs:
           KERNEL_TARGET="current,edge"
           EOF
 
+      - name: Build for mele-a200
+        run: |
+          cd build
           ./compile.sh build BOARD=mele-a200 BRANCH=current BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=jammy
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: built-images
+          path: build/output/images
+
