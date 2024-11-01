@@ -31,7 +31,7 @@ jobs:
       - name: Build for mele-a200
         run: |
           cd build
-          ./compile.sh build BOARD=mele-a200 BRANCH=current BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=jammy
+          ./compile.sh build BOARD=mele-a200 BRANCH=current BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=jammy FORCE_CHECK_MD5_PACKAGES=no
 
       - uses: actions/upload-artifact@v4
         with:
