@@ -15,7 +15,7 @@ jobs:
 
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=main https://github.com/armbian/build
+          git clone --depth=1 --branch=main https://github.com/mofeng-git/build
       - name: Build for mele-a200
         run: |
           cd build
