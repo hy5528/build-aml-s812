@@ -9,6 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    runs-on: ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
 
     steps:
       - uses: actions/checkout@v3
