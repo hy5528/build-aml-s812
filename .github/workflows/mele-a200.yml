@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: debian:buster
+
     steps:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
