@@ -15,23 +15,11 @@ jobs:
 
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=v23.11.2 https://github.com/armbian/build 
-
-      - name: Patch Mele A200
-        run: |          
-          cat <<EOF > ./build/config/boards/mele-a200.conf
-          BOARD_NAME="Mele A200"
-          BOARDFAMILY="sun5i"
-          BOARD_MAINTAINER=""
-          HAS_VIDEO_OUTPUT="yes"
-          BOOTCONFIG="A10s-OLinuXino-M_defconfig"
-          KERNEL_TARGET="current,edge"
-          EOF
-
+          git clone --depth=1 --branch=main https://github.com/mofeng-git/build
       - name: Build for mele-a200
         run: |
           cd build
-          ./compile.sh build BOARD=mele-a200 BRANCH=current BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=jammy FORCE_CHECK_MD5_PACKAGES=no
+          ./compile.sh build BOARD=onecloud BRANCH=legacy BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=jammy FORCE_CHECK_MD5_PACKAGES=no
 
       - uses: actions/upload-artifact@v4
         with:
