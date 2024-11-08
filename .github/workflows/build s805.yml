@@ -26,7 +26,7 @@ jobs:
         run: |
           cd Build-Armbian
           ./compile.sh BOARD="odroidxu4" BRANCH="current" RELEASE="bullseye" KERNEL_ONLY="no" KERNEL_CONFIGURE="no" BUILD_DESKTOP="no" BUILD_MINIMAL="yes"
-      - uses: actions/upload-artifact@v4
+      - uses: softprops/action-gh-release@v2.0.4
         with:
           name: built-images
           path: build/output/images
