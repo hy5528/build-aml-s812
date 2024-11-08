@@ -28,7 +28,7 @@ jobs:
       - name: Build for onecloud
         run: |
           cd build
-          sudo ./compile.sh  BOARD=onecloud BRANCH=legacy RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
+          ./compile.sh  BOARD=onecloud BRANCH=legacy RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
       - uses: actions/upload-artifact@v4
         with:
           name: built-images
