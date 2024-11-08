@@ -11,11 +11,6 @@ jobs:
     runs-on: ubuntu-20.04
     container: ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
     steps:
-      - name: install dep
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y curl jq gpg python3-pyquery wget xz-utils make gcc-arm-linux-gnueabihf flex bison dpkg-dev bc rsync kmod cpio libssl-dev git lsb vim libelf-dev neofetch python3-pip python3-tk debhelper zstd dpkg-sig mmdebstrap qemu-user-static usrmerge binfmt-support systemd-container
-      
       - name: Checkout armbian/build
         run: |
           git clone --depth=1 --branch=main https://github.com/mofeng-git/build
