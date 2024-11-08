@@ -32,7 +32,7 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ github.event.inputs.target }}
+          name: aml-s812${{ github.event.inputs.target }}
           path: Build-Armbian/output/images/*
       - name: Upload to release
         uses: softprops/action-gh-release@v1
