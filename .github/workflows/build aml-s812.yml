@@ -32,8 +32,8 @@ jobs:
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.RELEASE }}-${{ matrix.BRANCH }}-${{ matrix.TYPE == 'desktop' && matrix.DESKTOP_ENVIRONMENT || matrix.TYPE }}
-          path: output/images/*
+          name: ${{ github.event.inputs.target }}
+          path: output/images/*.img
       - name: Upload to release
         uses: softprops/action-gh-release@v1
         with:
