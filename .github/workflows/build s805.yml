@@ -26,7 +26,11 @@ jobs:
         run: |
           cd Build-Armbian
           ./compile.sh BOARD="odroidxu4" BRANCH="current" RELEASE="bullseye" KERNEL_ONLY="no" KERNEL_CONFIGURE="no" BUILD_DESKTOP="no" BUILD_MINIMAL="yes"
-      - uses: softprops/action-gh-release@v2.0.4
+      - name: Upload to release
+        uses: softprops/action-gh-release@v1
         with:
-          name: built-images
-          path: build/output/images
+          tag_name: ${{ env.TAG }}
+          append_body: true
+          body_path: Release.md
+          files: |
+            output/images/*
