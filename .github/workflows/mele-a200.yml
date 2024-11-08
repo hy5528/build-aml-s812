@@ -22,11 +22,11 @@ jobs:
 
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=master https://github.com/witallwang/Build-Armbian
+          git clone --depth=1 --branch=s805 https://github.com/soulteary/armbian-build-s805/tree/s805
       - name: Build for mele-a200
         run: |
-          cd Build-Armbian
-          sudo ./compile.sh build BOARD=aml-s812 BRANCH=legacy BUILD_DESKTOP=no BUILD_MINIMAL=yes COMPRESS_OUTPUTIMAGE=img EXTRAWIFI=yes  KERNEL_CONFIGURE=no  DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna RELEASE=jammy BOOTSIZE=64  SYNC_CLOCK=no INCLUDE_HOME_DIR=yes  KERNEL_COMPILER=/home/mofeng/code/toolchain/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-
+          cd s805
+          sudo ./compile.sh build BOARD=aml-s812 BRANCH=legacy BUILD_DESKTOP=no BUILD_MINIMAL=yes COMPRESS_OUTPUTIMAGE=img EXTRAWIFI=yes  KERNEL_CONFIGURE=no  DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna RELEASE=jammy BOOTSIZE=64  SYNC_CLOCK=no INCLUDE_HOME_DIR=yes  
 
       - uses: actions/upload-artifact@v4
         with:
