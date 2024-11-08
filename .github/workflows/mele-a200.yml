@@ -1,5 +1,5 @@
 
-name: build mele-a200 image
+name: build s805 image
 
 on:
   push:
@@ -27,10 +27,10 @@ jobs:
       - name: Checkout armbian/build
         run: |
           git clone --depth=1 --branch=master https://github.com/witallwang/Build-Armbian
-      - name: Build for mele-a200
+      - name: Build for s805
         run: |
           cd Build-Armbian
-          sudo ./compile.sh  BOARD=aml-s812 BRANCH=current RELEASE=bullseye BUILD_MINIMAL=no BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
+          sudo ./compile.sh  BOARD=aml-s812 BRANCH=current RELEASE=jammy BUILD_MINIMAL=no BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
 
       - uses: actions/upload-artifact@v4
         with:
