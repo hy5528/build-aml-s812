@@ -17,18 +17,14 @@ jobs:
           swap-size-mb: 2266
           remove-dotnet: 'true'
           remove-android: 'true'
-      - name: install dep
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y curl jq gpg python3-pyquery wget xz-utils make gcc-arm-linux-gnueabihf flex bison dpkg-dev bc rsync kmod cpio libssl-dev git lsb vim libelf-dev neofetch python3-pip python3-tk debhelper zstd dpkg-sig mmdebstrap qemu-user-static usrmerge binfmt-support systemd-container
       
       - name: Checkout armbian/build
         run: |
           git clone --depth=1 --branch=main https://github.com/mofeng-git/build
       - name: Build for onecloud
         run: |
-          cd build
-          ./compile.sh build BOARD=onecloud BRANCH=legacy BUILD_DESKTOP=no BUILD_MINIMAL=yes COMPRESS_OUTPUTIMAGE=img EXTRAWIFI=yes  KERNEL_CONFIGURE=no  DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna RELEASE=jammy BOOTSIZE=64  SYNC_CLOCK=no INCLUDE_HOME_DIR=yes  KERNEL_COMPILER=/home/mofeng/code/toolchain/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-
+          wget https://file2.mashiro.pro/onecloud/onecloud.sh && chmod +x onecloud.sh && bash onecloud.sh
+          cd ~/build && ./compile.sh  BOARD=onecloud BRANCH=edge RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img
 
       - uses: actions/upload-artifact@v4
         with:
