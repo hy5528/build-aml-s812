@@ -29,7 +29,11 @@ jobs:
         run: |
           cd Build-Armbian
           sudo ./compile.sh  BOARD=aml-s812 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
-      - uses: softprops/action-gh-release@v2.0.4
+      - name: Upload to release
+        uses: softprops/action-gh-release@v1
         with:
-          name: built-images
-          path: build/output/images
+          tag_name: ${{ env.TAG }}
+          append_body: true
+          body_path: Release.md
+          files: |
+            output/images/*
