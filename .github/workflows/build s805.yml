@@ -9,7 +9,7 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-
+    container: ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
     steps:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
@@ -26,11 +26,11 @@ jobs:
       
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=master https://github.com/witallwang/Build-Armbian
+          git clone --depth=1 --branch=main https://github.com/mofeng-git/build
       - name: Build for s805
         run: |
-          cd Build-Armbian
-          sudo ./compile.sh  BOARD=aml-s812 BRANCH=current RELEASE=jammy BUILD_MINIMAL=no BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
+          cd build
+          sudo ./compile.sh  BOARD=onecloud BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
 
       - uses: actions/upload-artifact@v4
         with:
