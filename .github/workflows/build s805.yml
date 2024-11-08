@@ -20,12 +20,12 @@ jobs:
       
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=main https://github.com/mofeng-git/build
+          git clone https://github.com/witallwang/Build-Armbian
+          
       - name: Build for onecloud
         run: |
-          wget https://file2.mashiro.pro/onecloud/onecloud.sh && chmod +x onecloud.sh && bash onecloud.sh
-          cd ~/build && ./compile.sh  BOARD=onecloud BRANCH=edge RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img
-
+          cd Build-Armbian
+          ./compile.sh BOARD="odroidxu4" BRANCH="current" RELEASE="bullseye" KERNEL_ONLY="no" KERNEL_CONFIGURE="no" BUILD_DESKTOP="no" BUILD_MINIMAL="yes"
       - uses: actions/upload-artifact@v4
         with:
           name: built-images
