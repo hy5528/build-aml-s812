@@ -22,7 +22,12 @@ jobs:
           BOARD_NAME="OneCloud"
           BOARDFAMILY="meson8b"
           BOARD_MAINTAINER="hzyitc"
-          KERNEL_TARGET="legacy,current,edge"
+          KERNELDIR='linux-aml-5.9'
+          KERNELSOURCE='https://github.com/xdarklight/linux.git'
+          KERNELBRANCH='branch:meson-mx-integration-5.9-20200930'
+          KERNEL_DRIVERS_SKIP+=(driver_mt7921u_add_pids)
+          KERNEL_DRIVERS_SKIP+=(driver_rtw88)
+          KERNEL_DRIVERS_SKIP+=(driver_rtl8723cs)
 
           BOOTCONFIG="none"
           BOOTSCRIPT="boot-onecloud.cmd:boot.cmd"
