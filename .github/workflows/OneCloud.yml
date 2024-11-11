@@ -14,7 +14,7 @@ jobs:
 
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=main https://github.com/mofeng-git/buil
+          git clone --depth=1 --branch=main https://github.com/mofeng-git/build
 
       - name: Patch OneCloud
         run: |          
