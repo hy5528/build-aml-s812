@@ -23,7 +23,6 @@ jobs:
           BOARDFAMILY="meson8b"
           BOARD_MAINTAINER="hzyitc"
 
-          BOOTCONFIG="none"
           BOOTSCRIPT="boot-onecloud.cmd:boot.cmd"
           BOOTENV_FILE="onecloud.txt"
 
