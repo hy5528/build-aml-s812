@@ -19,10 +19,10 @@ jobs:
       - name: Patch OneCloud
         run: |          
           cat <<EOF > ./build/config/boards/onecloud.conf
-          BOARD_NAME="OneCloud"
+          BOARD_NAME="onecloud"
           BOARDFAMILY="meson8b"
           BOARD_MAINTAINER="hzyitc"
-          BOOTCONFIG="linux-meson-legacy.config"
+          BOOTCONFIG="linux-meson-edge.config"
           BOOTSCRIPT="boot-onecloud.cmd:boot.cmd"
           BOOTENV_FILE="onecloud.txt"
 
@@ -34,7 +34,7 @@ jobs:
       - name: Build for OneCloud
         run: |
           cd build
-          ./compile.sh build BOARD=onecloud BRANCH=legacy BUILD_DESKTOP=no BUILD_MINIMAL=yes COMPRESS_OUTPUTIMAGE=img EXTRAWIFI=yes  KERNEL_CONFIGURE=no  DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna RELEASE=jammy BOOTSIZE=64  SYNC_CLOCK=no INCLUDE_HOME_DIR=yes 
+          ./compile.sh build BOARD=onecloud BRANCH=edge BUILD_DESKTOP=no BUILD_MINIMAL=yes COMPRESS_OUTPUTIMAGE=img EXTRAWIFI=yes  KERNEL_CONFIGURE=no  DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna RELEASE=jammy BOOTSIZE=64  SYNC_CLOCK=no INCLUDE_HOME_DIR=yes 
       - uses: actions/upload-artifact@v4
         with:
           name: built-images
