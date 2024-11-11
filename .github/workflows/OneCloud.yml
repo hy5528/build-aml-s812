@@ -1,0 +1,44 @@
+name: build OneCloud image
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Checkout armbian/build
+        run: |
+          git clone --depth=1 --branch=main https://github.com/mofeng-git/buil
+
+      - name: Patch OneCloud
+        run: |          
+          cat <<EOF > ./build/config/boards/onecloud.conf
+          BOARD_NAME="OneCloud"
+          BOARDFAMILY="meson8b"
+          BOARD_MAINTAINER="hzyitc"
+          KERNEL_TARGET="legacy,current,edge"
+
+         BOOTCONFIG="none"
+         BOOTSCRIPT="boot-onecloud.cmd:boot.cmd"
+         BOOTENV_FILE="onecloud.txt"
+
+         OFFSET="16"
+         BOOTSIZE="64"
+         BOOTFS_TYPE="fat"
+          EOF
+
+      - name: Build for OneCloud
+        run: |
+          cd build
+          ./compile.sh build BOARD=onecloud BRANCH=legacy BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=jammy FORCE_CHECK_MD5_PACKAGES=no
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: built-images
+          path: build/output/images
