@@ -21,7 +21,7 @@ jobs:
           cat <<EOF > ./Build-Armbian/config/boards/aml-s812.conf
           BOARD_NAME="S812"
           BOARDFAMILY=aml-s812
-          BOOTCONFIG="odroidc_config"
+          BOOTCONFIG="linux-aml-s812-dev.config"
           BOARD_DIR=packages/bsp/aml-s812
           ADD_UBOOT="yes"
           KERNEL_TARGET="legacy,current,dev"
@@ -31,7 +31,7 @@ jobs:
       - name: Build for aml-s812
         run: |
           cd Build-Armbian
-          sudo ./compile.sh  BOARD=aml-s812 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
+          sudo ./compile.sh  BOARD=aml-s812 BRANCH=dev RELEASE=bullseye BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
     
       - name: Build burn for aml-s812
         run: |
