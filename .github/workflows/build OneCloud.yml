@@ -22,7 +22,6 @@ jobs:
           BOARD_NAME="onecloud"
           BOARDFAMILY="meson8b"
           BOARD_MAINTAINER="hzyitc"
-          BOOTCONFIG="linux-meson-edge.config"
           BOOTSCRIPT="boot-onecloud.cmd:boot.cmd"
           BOOTENV_FILE="onecloud.txt"
 
