@@ -31,6 +31,7 @@ jobs:
       - name: Build for aml-s812
         run: |
           cd Build-Armbian
+          rm /usr/share/keyrings/*
           sudo ./compile.sh  BOARD=aml-s812 BRANCH=current RELEASE=bullseye BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
 
 
