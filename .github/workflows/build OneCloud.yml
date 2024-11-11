@@ -14,7 +14,18 @@ jobs:
 
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=main https://github.com/mofeng-git/build
+          git clone --depth=1 --branch=main https://github.com/hy5528/build
+          
+      - name: Patch onecloud
+        run: |          
+          cat <<EOF > ./build/config/boards/onecloud.conf
+          BOARD_NAME="onecloud"
+          BOARDFAMILY="sun5i"
+          BOARD_MAINTAINER=""
+          HAS_VIDEO_OUTPUT="yes"
+          BOOTCONFIG="linux-meson-legacy.config"
+          KERNEL_TARGET="current,edge"
+          EOF
 
       - name: Build for OneCloud
         run: |
