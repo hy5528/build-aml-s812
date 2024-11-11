@@ -28,17 +28,6 @@ jobs:
         run: |
           git clone --depth=1 --branch=main https://github.com/hy5528/Build-Armbian
 
-      - name: Patch aml-s812
-        run: |          
-          cat <<EOF > ./Build-Armbian/config/boards/aml-s812.conf
-          BOARD_NAME="S812"
-          BOARDFAMILY=aml-s812
-          BOOTCONFIG="linux-aml-s812-current.config"
-          BOARD_DIR=packages/bsp/aml-s812
-          ADD_UBOOT="yes"
-          KERNEL_TARGET="legacy,current,dev"
-          FULL_DESKTOP="yes"
-          EOF
 
       - name: Build for aml-s812
         run: |
