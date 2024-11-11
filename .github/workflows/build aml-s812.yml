@@ -2,33 +2,36 @@ name: build aml-s812 image
 
 on:
   push:
+    branches: [ "master" ]
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Maximize build space
-        uses: easimon/maximize-build-space@master
-        with:
-          # 这个值是保留给系统的空间大小，之前设置太小，总会在安装依赖或者编译过程中报设备空间不足的错误而导致编译失败
-          root-reserve-mb: 18096
-          swap-size-mb: 2266
-          remove-dotnet: 'true'
-          remove-android: 'true'
-      - name: install dep
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y curl jq gpg python3-pyquery wget xz-utils make gcc-arm-linux-gnueabihf flex bison dpkg-dev bc rsync kmod cpio libssl-dev git lsb vim libelf-dev neofetch python3-pip python3-tk debhelper zstd dpkg-sig mmdebstrap qemu-user-static usrmerge binfmt-support systemd-container
-      
+      - uses: actions/checkout@v3
+
       - name: Checkout armbian/build
         run: |
           git clone --depth=1 --branch=main https://github.com/hy5528/Build-Armbian
+
+      - name: Patch aml-s812
+        run: |          
+          cat <<EOF > ./build/config/boards/aml-s812.conf
+          BOARD_NAME="S812"
+          BOARDFAMILY=aml-s812
+          BOOTCONFIG="odroidc_config"
+          BOARD_DIR=packages/bsp/aml-s812
+          ADD_UBOOT="yes"
+          KERNEL_TARGET="legacy,current,dev"
+          FULL_DESKTOP="yes"
+          EOF
+
       - name: Build for aml-s812
         run: |
           cd Build-Armbian
-          sudo ./compile.sh  BOARD=aml-s812 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
+          ./compile.sh build BOARD=aml-s812 BRANCH=legacy BUILD_DESKTOP=no BUILD_MINIMAL=yes COMPRESS_OUTPUTIMAGE=img EXTRAWIFI=yes  KERNEL_CONFIGURE=no  DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna RELEASE=jammy BOOTSIZE=64  SYNC_CLOCK=no INCLUDE_HOME_DIR=yes 
 
       - name: Build burn for aml-s812
         run: |
@@ -38,4 +41,4 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: built-images
-          path: Build-Armbian/output/images/*
+          path: Build-Armbian/output/images/
