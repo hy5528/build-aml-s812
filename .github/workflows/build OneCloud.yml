@@ -16,21 +16,6 @@ jobs:
         run: |
           git clone --depth=1 --branch=main https://github.com/mofeng-git/build
 
-      - name: Patch OneCloud
-        run: |          
-          cat <<EOF > ./build/config/boards/onecloud.conf
-          BOARD_NAME="onecloud"
-          BOARDFAMILY=""
-          BOARD_MAINTAINER="hzyitc"
-          BOOTCONFIG="linux-meson-edge.config"
-          BOOTSCRIPT="boot-onecloud.cmd:boot.cmd"
-          BOOTENV_FILE="onecloud.txt"
-
-          OFFSET="16"
-          BOOTSIZE="64"
-          BOOTFS_TYPE="fat"
-          EOF
-
       - name: Build for OneCloud
         run: |
           cd build
