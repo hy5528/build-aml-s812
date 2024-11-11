@@ -24,13 +24,13 @@ jobs:
           BOARD_MAINTAINER="hzyitc"
           KERNEL_TARGET="legacy,current,edge"
 
-         BOOTCONFIG="none"
-         BOOTSCRIPT="boot-onecloud.cmd:boot.cmd"
-         BOOTENV_FILE="onecloud.txt"
+          BOOTCONFIG="none"
+          BOOTSCRIPT="boot-onecloud.cmd:boot.cmd"
+          BOOTENV_FILE="onecloud.txt"
 
-         OFFSET="16"
-         BOOTSIZE="64"
-         BOOTFS_TYPE="fat"
+          OFFSET="16"
+          BOOTSIZE="64"
+          BOOTFS_TYPE="fat"
           EOF
 
       - name: Build for OneCloud
