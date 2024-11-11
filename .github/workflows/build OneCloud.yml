@@ -20,8 +20,9 @@ jobs:
         run: |          
           cat <<EOF > ./build/config/boards/onecloud.conf
           BOARD_NAME="onecloud"
-          BOARDFAMILY="meson8b"
+          BOARDFAMILY=""
           BOARD_MAINTAINER="hzyitc"
+          BOOTCONFIG="linux-meson-edge.config"
           BOOTSCRIPT="boot-onecloud.cmd:boot.cmd"
           BOOTENV_FILE="onecloud.txt"
 
