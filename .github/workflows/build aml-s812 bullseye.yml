@@ -18,7 +18,7 @@ jobs:
       - name: Build for aml-s812
         run: |
           cd Build-Armbian
-          ./compile.sh build BOARD=onecloud BRANCH=dev BUILD_DESKTOP=no BUILD_MINIMAL=yes COMPRESS_OUTPUTIMAGE=img EXTRAWIFI=yes  KERNEL_CONFIGURE=no   MAINLINE_MIRROR=tuna RELEASE=bullseye BOOTSIZE=64  SYNC_CLOCK=no INCLUDE_HOME_DIR=yes KERNEL_COMPILER=/home/runner/work/_temp/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-
+          ./compile.sh build BOARD=aml-s812 BRANCH=dev BUILD_DESKTOP=no BUILD_MINIMAL=yes COMPRESS_OUTPUTIMAGE=img EXTRAWIFI=yes  KERNEL_CONFIGURE=no   MAINLINE_MIRROR=tuna RELEASE=bullseye BOOTSIZE=64  SYNC_CLOCK=no INCLUDE_HOME_DIR=yes KERNEL_COMPILER=/home/runner/work/_temp/gcc-arm-9.2-2019.12-x86_64-arm-none-linux-gnueabihf/bin/arm-none-linux-gnueabihf-
 
 
       - uses: actions/upload-artifact@v4
