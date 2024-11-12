@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-20.04
     container: ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
     
-  steps:
+   steps:
      - name: Checkout armbian/build
         run: |
           git clone --depth=1 --branch=main https://github.com/hy5528/Build
