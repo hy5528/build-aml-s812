@@ -8,7 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-20.04
-
+    container: ghcr.io/armbian/docker-armbian-build:armbian-ubuntu-jammy-latest
+    
     steps:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
@@ -27,7 +28,8 @@ jobs:
       - name: Build for aml-s812
         run: |
           cd build
-          ./compile.sh build BOARD=onecloud BRANCH=legacy BUILD_DESKTOP=no BUILD_MINIMAL=yes COMPRESS_OUTPUTIMAGE=img EXTRAWIFI=yes  KERNEL_CONFIGURE=no  DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna RELEASE=jammy BOOTSIZE=64  SYNC_CLOCK=no INCLUDE_HOME_DIR=yes  
+          ./compile.sh  BOARD=onecloud  BRANCH=current RELEASE=jammy  BUILD_MINIMAL=yes  BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
+   
       - uses: actions/upload-artifact@v4
         with:
           name: built-images
