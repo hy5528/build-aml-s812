@@ -21,7 +21,6 @@ jobs:
         env:
           DEBIAN_FRONTEND: noninteractive
         run: |
-          sudo rm -rf /etc/apt/sources.list.d/* /usr/share/dotnet /usr/local/lib/android /opt/ghc
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install -y $(curl -fsSL https://raw.githubusercontent.com/fat-wang/onecloud-build/main/compile-kernel/tools/script/armbian-compile-kernel-depends)
           sudo -E apt-get -qq autoremove --purge
