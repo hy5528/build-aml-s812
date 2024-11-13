@@ -26,7 +26,7 @@ jobs:
 
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=s8xx https://github.com/QQ3188170/build-armbian-custom
+          git clone --depth=1 --branch=B860A_S812 https://github.com/QQ3188170/build-armbian-custom
 
 
       - name: Build for aml-s812
