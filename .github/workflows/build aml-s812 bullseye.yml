@@ -18,8 +18,6 @@ jobs:
           remove-dotnet: 'true'
           remove-android: 'true'
       - name: Initialization environment
-        env:
-          DEBIAN_FRONTEND: noninteractive
         run: |
           sudo -E apt-get -qq update
           sudo -E apt-get -qq install -y $(curl -fsSL https://raw.githubusercontent.com/fat-wang/onecloud-build/main/compile-kernel/tools/script/armbian-compile-kernel-depends)
