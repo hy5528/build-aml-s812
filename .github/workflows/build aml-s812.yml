@@ -16,7 +16,6 @@ jobs:
           fetch-depth: 0
           repository: armbian/build
           path: build
-          ref: nightly
           clean: false
 
       - name: Import GPG key
