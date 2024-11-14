@@ -18,14 +18,15 @@ jobs:
           path: build
           clean: false
 
-      - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v3
+       -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
         with:
-          gpg-private-key: ${{ secrets.GPG_KEY2 }}
-          passphrase: ${{ secrets.GPG_PASSPHRASE2 }}
-          workdir: build
-          git-user-signingkey: true
-          git-commit-gpgsign: true
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
