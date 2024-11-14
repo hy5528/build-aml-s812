@@ -24,7 +24,22 @@ jobs:
           sudo apt-get install -y curl jq gpg python3-pyquery wget xz-utils make gcc-arm-linux-gnueabihf flex bison dpkg-dev bc rsync kmod cpio libssl-dev git lsb vim libelf-dev neofetch python3-pip python3-tk debhelper zstd dpkg-sig mmdebstrap qemu-user-static usrmerge binfmt-support systemd-container
     
 
-
+      -
+        name: Import GPG key
+        uses: crazy-max/ghaction-import-gpg@v6
+        with:
+          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          git_user_signingkey: true
+          git_commit_gpgsign: true
+      -
+        name: Sign commit and push changes
+        run: |
+          echo foo > bar.txt
+          git add .
+          git commit -S -m "This commit is signed!"
+          git push
+          
       - name: Checkout armbian/build
         run: |
           git clone --depth=1 --branch=s8xx https://github.com/QQ3188170/build-armbian-custom
