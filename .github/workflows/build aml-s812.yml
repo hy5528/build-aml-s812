@@ -29,13 +29,7 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           git_user_signingkey: true
           git_commit_gpgsign: true
-      -
-        name: Sign commit and push changes
-        run: |
-          echo foo > bar.txt
-          git add .
-          git commit -S -m "This commit is signed!"
-          git push
+
 
       - name: Checkout armbian/build
         run: |
