@@ -10,19 +10,6 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - name: Checkout Armbian build script
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          repository: armbian/build
-          path: build
-          clean: false
-      -
-        name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v6
-        with:
-          gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
-          passphrase: ${{ secrets.PASSPHRASE }}
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
