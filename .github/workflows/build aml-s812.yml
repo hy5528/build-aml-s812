@@ -17,10 +17,6 @@ jobs:
           repository: armbian/build
           path: build
           clean: false
-
-       -
-        name: Checkout
-        uses: actions/checkout@v4
       -
         name: Import GPG key
         uses: crazy-max/ghaction-import-gpg@v6
