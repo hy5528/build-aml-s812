@@ -18,12 +18,12 @@ jobs:
 
       - name: Patch Mele A200
         run: |          
-          cat <<EOF > ./build/config/boards/mele-a200.conf
-          BOARD_NAME="Mele A200"
-          BOARDFAMILY="sun5i"
+          cat <<EOF > ./build/config/boards/onecloud
+          BOARD_NAME="onecloud"
+          BOARDFAMILY="meson8b"
           BOARD_MAINTAINER=""
           HAS_VIDEO_OUTPUT="yes"
-          BOOTCONFIG="A10s-OLinuXino-M_defconfig"
+          BOOTCONFIG="none"
           KERNEL_TARGET="current,edge"
           EOF
 
