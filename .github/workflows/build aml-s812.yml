@@ -29,7 +29,7 @@ jobs:
           git clone --depth=1 --branch=codebase-merge-leo357449107 https://github.com/soulteary/armbian-build-s805
       - name: Build for aml-s812
         run: |
-          cd Build-Armbian
+          cd armbian-build-s805
           sudo ./compile.sh  BOARD=aml-s812 BRANCH=current RELEASE=Bullseye BUILD_MINIMAL=no BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
       - name: Build burn for aml-s812
         run: |
