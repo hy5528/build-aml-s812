@@ -19,17 +19,16 @@ jobs:
       - name: Patch Mele A200
         run: |          
           cat <<EOF > ./build/config/boards/onecloud
-          BOARD_NAME="onecloud"
-          BOARDFAMILY="meson8b"
-          BOARD_MAINTAINER="hzyitc"
-          BOOTCONFIG="none"
+          BOARD_NAME="S812"
+          BOARDFAMILY="aml-s812"
+          BOOTCONFIG="odroidc_config"
           KERNEL_TARGET="current,edge"
           EOF
 
       - name: Build for mele-a200
         run: |
           cd build
-          ./compile.sh build BOARD=onecloud BRANCH=current BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=jammy FORCE_CHECK_MD5_PACKAGES=no
+          ./compile.sh build BOARD=aml-s812 BRANCH=current BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=jammy FORCE_CHECK_MD5_PACKAGES=no
 
       - uses: actions/upload-artifact@v4
         with:
