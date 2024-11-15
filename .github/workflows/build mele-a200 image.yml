@@ -14,7 +14,7 @@ jobs:
 
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=main https://github.com/mofeng-git/build
+          git clone --depth=1 --branch=main https://github.com/hy5528/Build-Armbian
 
       - name: Patch Mele A200
         run: |          
@@ -27,7 +27,7 @@ jobs:
 
       - name: Build for mele-a200
         run: |
-          cd build
+          cd Build-Armbian
           ./compile.sh build BOARD=aml-s812 BRANCH=current BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=jammy FORCE_CHECK_MD5_PACKAGES=no
 
       - uses: actions/upload-artifact@v4
