@@ -25,9 +25,6 @@ jobs:
       - name: Patch Mele A200
         run: |          
           cat <<EOF > ./Build-Armbian/config/boards/aml-s812.conf
-          BOARD_NAME="S812"
-          BOARDFAMILY=aml-s812
-          BOOTCONFIG="odroidc_config"
           BOARD_DIR=packages/bsp/aml-s812
           ADD_UBOOT="yes"
           KERNEL_TARGET="legacy,current,dev"
