@@ -21,7 +21,7 @@ jobs:
           cat <<EOF > ./build/config/boards/onecloud
           BOARD_NAME="S812"
           BOARDFAMILY="aml-s812"
-          BOOTCONFIG="odroidc_config"
+          BOOTCONFIG="linux-aml-s812-current.config"
           KERNEL_TARGET="current,edge"
           EOF
 
