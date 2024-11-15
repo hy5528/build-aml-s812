@@ -26,9 +26,12 @@ jobs:
         run: |          
           cat <<EOF > ./Build-Armbian/config/boards/aml-s812.conf
           BOARD_NAME="S812"
-          BOARDFAMILY="aml-s812"
+          BOARDFAMILY=aml-s812
           BOOTCONFIG="odroidc_config"
-          KERNEL_TARGET="current,edge"
+          BOARD_DIR=packages/bsp/aml-s812
+          ADD_UBOOT="yes"
+          KERNEL_TARGET="legacy,current,dev"
+          FULL_DESKTOP="yes"
           EOF
 
       - name: Build for mele-a200
