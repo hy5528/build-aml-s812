@@ -27,7 +27,7 @@ jobs:
           cat <<EOF > ./Build-Armbian/config/boards/aml-s812.conf
           BOARD_DIR=packages/bsp/aml-s812
           ADD_UBOOT="yes"
-          KERNEL_TARGET="legacy,current,dev"
+          KERNEL_TARGET="lcurrent"
           FULL_DESKTOP="yes"
           EOF
 
