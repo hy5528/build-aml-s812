@@ -27,7 +27,6 @@ jobs:
           cat <<EOF > ./Build-Armbian/config/boards/aml-s812.conf
           BOARD_NAME="S812"
           BOARDFAMILY="aml-s812"
-          BOOTCONFIG="linux-aml-s812-current.config"
           KERNEL_TARGET="current,edge"
           EOF
 
