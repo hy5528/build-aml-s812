@@ -25,7 +25,7 @@ jobs:
       
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=main https://github.com/hy5528/Build-Armbian
+          git clone --depth=1 --branch=main https://github.com/witallwang/Build-Armbian
 
       - name: Patch Mele A200
         run: |          
