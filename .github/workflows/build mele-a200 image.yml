@@ -18,7 +18,7 @@ jobs:
 
       - name: Patch Mele A200
         run: |          
-          cat <<EOF > ./build/config/boards/onecloud
+          cat <<EOF > ./build/config/boards/aml-s812.conf
           BOARD_NAME="S812"
           BOARDFAMILY="aml-s812"
           BOOTCONFIG="linux-aml-s812-current.config"
