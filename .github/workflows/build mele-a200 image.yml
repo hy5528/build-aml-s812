@@ -28,7 +28,7 @@ jobs:
       - name: Build for mele-a200
         run: |
           cd Build-Armbian
-          ./compile.sh build BOARD=aml-s812 BRANCH=current BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=jammy FORCE_CHECK_MD5_PACKAGES=no
+          sudo ./compile.sh build BOARD=aml-s812 BRANCH=current BUILD_MINIMAL=yes KERNEL_CONFIGURE=no RELEASE=jammy FORCE_CHECK_MD5_PACKAGES=no
 
       - uses: actions/upload-artifact@v4
         with:
