@@ -33,7 +33,7 @@ jobs:
           mkdir -p build/output/images
           cd build/output/images
           wget https://github.com/hzyitc/armbian-onecloud/releases/download/ci-20240311-162146-UTC/Armbian-unofficial_24.5.0-trunk_Onecloud_jammy_current_6.6.21_minimal.img.xz
-          unzip Armbian-unofficial_24.5.0-trunk_Onecloud_jammy_current_6.6.21_minimal.img.xz
+      
           sudo ./rebuild -b Onecloud -k 5.9.0
           
       - name: Build burn for aml-s812
