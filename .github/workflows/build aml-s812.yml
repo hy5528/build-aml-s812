@@ -34,7 +34,7 @@ jobs:
       - name: Build burn for aml-s812
         run: |
           cd Build-Armbian
-          sudo ./userpatches/burnimg-pack.sh output/images/Armbian_20.12_Aml-s812_buster_current_5.9.0-rc7_minimal.img
+          sudo ./userpatches/burnimg-pack.sh /Build-Armbian/output/images/Armbian_20.12_Aml-s812_buster_current_5.9.0-rc7_minimal.img
       - uses: actions/upload-artifact@v4
         with:
           name: built-images
