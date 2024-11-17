@@ -33,10 +33,8 @@ jobs:
           sudo ./compile.sh  BOARD=aml-s812 BRANCH=current RELEASE=buster BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
       - name: Build burn for aml-s812
         run: |
-          cd Build-Armbian
-          wget https://github.com/hy5528/Armbian-onecloud/blob/main/userpatches/burnimg-pack.sh
-          chmod +x burnimg-pack.sh
-          sudo ./burnimg-pack.sh output/images/Armbian_20.12_Aml-s812_buster_current_5.9.0-rc7_minimal.img
+          chmod +x /userpatches/burnimg-pack.sh
+          sudo ./userpatches/burnimg-pack.sh output/images/Armbian_20.12_Aml-s812_buster_current_5.9.0-rc7_minimal.img
       - uses: actions/upload-artifact@v4
         with:
           name: built-images
