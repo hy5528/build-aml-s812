@@ -1,4 +1,4 @@
-name: build aml-s812 image
+name: build s805 image
 
 on:
   push:
