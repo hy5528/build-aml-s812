@@ -18,15 +18,23 @@ jobs:
           swap-size-mb: 2266
           remove-dotnet: 'true'
           remove-android: 'true'
-  
+      - name: install dep
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl jq gpg python3-pyquery wget xz-utils make gcc-arm-linux-gnueabihf flex bison dpkg-dev bc rsync kmod cpio libssl-dev git lsb vim libelf-dev neofetch python3-pip python3-tk debhelper zstd dpkg-sig mmdebstrap qemu-user-static usrmerge binfmt-support systemd-container
+      
+
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=master https://github.com/hy5528/Armbian_21.11.0
+          git clone --depth=1 --branch=main https://github.com/hy5528/Build-Armbian
       - name: Build for aml-s812
         run: |
-          cd Armbian_21.11.0
-          sudo ./compile.sh  BOARD=aml-s812 BRANCH=current RELEASE=bullseye BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
-
+          cd Build-Armbian
+          sudo ./compile.sh  BOARD=aml-s812 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
+      - name: Build burn for aml-s812
+        run: |
+          cd Build-Armbian
+          sudo ./userpatches/burnimg-pack.sh output/images/Armbian_24.03_Aml-s812_jammy_current_5.9.0-rc7_minimal.img
       - uses: actions/upload-artifact@v4
         with:
           name: built-images
