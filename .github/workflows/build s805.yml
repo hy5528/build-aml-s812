@@ -21,11 +21,11 @@ jobs:
 
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=master https://github.com/hy5528/s805-armbian-build
+          git clone --depth=1 --branch=codebase-on-offical https://github.com/soulteary/armbian-build-s805
       - name: Build for s805 
         run: |
-          cd s805-armbian-build
-          sudo ./compile.sh  BOARD=aml-s805 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no 
+          cd armbian-build-s805
+          sudo ./compile.sh  BOARD=aml-s805 BRANCH=current RELEASE=focal BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no 
       - name: Build burn for s805 
         run: |
           cd s805-armbian-build
