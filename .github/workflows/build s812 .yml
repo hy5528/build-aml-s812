@@ -26,7 +26,7 @@ jobs:
 
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=main soulteary/armbian-build-s805
+          git clone --depth=1 --branch=codebase-on-offical https://github.com/soulteary/armbian-build-s805
       - name: Build for aml-s812
         run: |
           cd armbian-build-s805
