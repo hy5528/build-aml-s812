@@ -27,11 +27,11 @@ jobs:
       - name: Checkout armbian/build
         run: |
           git clone --depth=1 --branch=master https://github.com/hy5528/s805-armbian-build
-      - name: Build for aml-s812
+      - name: Build for s805 
         run: |
           cd s805-armbian-build
           sudo ./compile.sh  BOARD=aml-s805 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no  KERNEL_CONFIGURE=no 
-      - name: Build burn for aml-s812
+      - name: Build burn for s805 
         run: |
           cd s805-armbian-build
           sudo ./userpatches/burnimg-pack.sh s805-armbian-build/images/Armbian_22.11_Aml-s812_jammy_current_5.9.0-rc7_minimal.img
