@@ -26,7 +26,7 @@ jobs:
 
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=master https://github.com/TooYoungTooSimp/s805-armbian-build
+          git clone --depth=1 --branch=master https://github.com/hy5528/s805-armbian-build
       - name: Build for s805 
         run: |
           cd s805-armbian-build
