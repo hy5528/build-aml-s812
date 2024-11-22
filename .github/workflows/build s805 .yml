@@ -1,4 +1,4 @@
-name: build s812 image
+name: build s805 image
 
 on:
   push:
@@ -26,16 +26,17 @@ jobs:
 
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=master https://github.com/hy5528/Build-Armbian
-      - name: Build for aml-s812
+          git clone --depth=1 --branch=master https://github.com/hy5528/Build-Armbian-s805
+      - name: Build for aml-s805
         run: |
-          cd Build-Armbian
+          cd Build-Armbian-s805
           sudo ./compile.sh  BOARD=aml-s805 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
-      - name: Build burn for aml-s812
+      - name: Build burn for aml-s805
         run: |
-          cd Build-Armbian
-          sudo ./userpatches/burnimg-pack.sh output/images/Armbian_22.11.0-trunk_Aml-s805_jammy_current_5.9.0-rc7_minimal.img
+          git clone --depth=1 --branch=main https://github.com/mofeng-git/Build-Armbian
+          cd Build-Armbian-s805
+          sudo ./home/runner/work/armbian-aml-s812/armbian-aml-s812/Build-Armbian/userpatches/burnimg-pack.sh output/images/Armbian_22.11.0-trunk_Aml-s805_jammy_current_5.9.0-rc7_minimal.img
       - uses: actions/upload-artifact@v4
         with:
           name: built-images
-          path: Build-Armbian/output/images/
+          path: Build-Armbian-s805/output/images/
