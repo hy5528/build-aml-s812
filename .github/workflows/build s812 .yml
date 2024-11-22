@@ -34,7 +34,7 @@ jobs:
       - name: Build burn for aml-s812
         run: |
           cd s805-armbian-build
-          sudo ./userpatches/burnimg-pack.sh output/images/Armbian_22.11.0-trunk_Aml-s812_jammy_current_5.9.0-rc7_minimal.img
+          sudo ./userpatches/burnimg-pack.sh output/images/Armbian_22.11.0-trunk_Aml-s805_jammy_current_5.9.0-rc7_minimal.img
       - uses: actions/upload-artifact@v4
         with:
           name: built-images
