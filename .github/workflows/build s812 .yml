@@ -26,15 +26,15 @@ jobs:
 
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=main https://github.com/hy5528/Build-Armbian
+          git clone --depth=1 --branch=master https://github.com/hy5528/s805-armbian-build
       - name: Build for aml-s812
         run: |
-          cd Build-Armbian
+          cd s805-armbian-build
           sudo ./compile.sh  BOARD=aml-s812 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
       - name: Build burn for aml-s812
         run: |
-          cd Build-Armbian
-          sudo ./userpatches/burnimg-pack.sh output/images/Armbian_24.03_Aml-s812_jammy_current_5.9.0-rc7_minimal.img
+          cd s805-armbian-build
+          sudo ./userpatches/burnimg-pack.sh output/images/Armbian_22.11.0-trunk_Aml-s812_jammy_current_5.9.0-rc7_minimal.img
       - uses: actions/upload-artifact@v4
         with:
           name: built-images
