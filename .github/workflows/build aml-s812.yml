@@ -1,0 +1,40 @@
+name: build aml-s812 image
+
+on:
+  push:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - name: Maximize build space
+        uses: easimon/maximize-build-space@master
+        with:
+          # 这个值是保留给系统的空间大小，之前设置太小，总会在安装依赖或者编译过程中报设备空间不足的错误而导致编译失败
+          root-reserve-mb: 8096
+          swap-size-mb: 2266
+          remove-dotnet: 'true'
+          remove-android: 'true'
+      - name: install dep
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y curl jq gpg python3-pyquery wget xz-utils make gcc-arm-linux-gnueabihf flex bison dpkg-dev bc rsync kmod cpio libssl-dev git lsb vim libelf-dev neofetch python3-pip python3-tk debhelper zstd dpkg-sig mmdebstrap qemu-user-static usrmerge binfmt-support systemd-container
+          sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys EE727D4449467F0E
+
+      - name: Checkout armbian/build
+        run: |
+          git clone --depth=1 --branch=main https://github.com/hy5528/Build-Armbian
+      - name: Build for aml-s812
+        run: |
+          cd Build-Armbian
+          sudo ./compile.sh  BOARD=aml-s812 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
+      - name: Build burn for aml-s812
+        run: |
+          sudo ./userpatches/burnimg-pack.sh output/images/Armbian_24.03_Aml-s812_jammy_current_5.9.0-rc7_minimal.img
+      - uses: actions/upload-artifact@v4
+        with:
+          name: built-images
+          path: Build-Armbian/output/images/
