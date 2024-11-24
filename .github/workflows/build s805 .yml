@@ -52,7 +52,7 @@ jobs:
       - name: Extract boot and rootfs partitions
         run: |
           cd s805-armbian-build
-          diskimg=$1
+          diskimg=$(ls output/images/*.img) 
           loop=$(losetup -f)
           sudo ./output/amlimg/AmlImg unpack output/amlimg/eMMC.burn.img output/amlimg
           sudo losetup  --show --partscan $loop $diskimg
