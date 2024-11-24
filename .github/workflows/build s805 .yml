@@ -97,6 +97,7 @@ jobs:
 
       - name: Generate release informations
         run: |
+          cd s805-armbian-build
           cat <<EOF | sed -E 's/^  //' | tee Release.md
             $(cat sha256sum | awk '{printf "%s: `%s`\n", $2, $1}')
           EOF
