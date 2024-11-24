@@ -35,25 +35,17 @@ jobs:
 
       - name: Install Dependents
         run: |
+          cd s805-armbian-build
           sudo apt install img2simg
-          if [ ! -d "output/amlimg" ];then
-            sudo mkdir output/amlimg
-          fi
 
+          sudo mkdir output/amlimg
 
-         if [ ! -d "/tmp/amlimg" ];then
-           mkdir /tmp/amlimg
-         fi
+          mkdir /tmp/amlimg
+  
+         sudo curl -L -o output/amlimg/AmlImg https://github.com/hzyitc/AmlImg/releases/download/v0.3.1/AmlImg_v0.3.1_linux_amd64
+         sudo chmod +x output/amlimg/AmlImg
 
-
-         if [ ! -f "output/amlimg/AmlImg" ];then
-           sudo curl -L -o output/amlimg/AmlImg https://github.com/hzyitc/AmlImg/releases/download/v0.3.1/AmlImg_v0.3.1_linux_amd64
-           sudo chmod +x output/amlimg/AmlImg
-         fi
-
-         if [ ! -f "output/amlimg/eMMC.burn.img" ];then
-           sudo curl -L -o output/amlimg/eMMC.burn.img https://github.com/hzyitc/u-boot-onecloud/releases/download/build-20221028-0940/eMMC.burn.img
-         fi
+         sudo curl -L -o output/amlimg/eMMC.burn.img https://github.com/hzyitc/u-boot-onecloud/releases/download/build-20221028-0940/eMMC.burn.img
 
       - name: Extract boot and rootfs partitions
         run: |
