@@ -42,9 +42,9 @@ jobs:
           fi
 
 
-        if [ ! -d "/tmp/amlimg" ];then
-          mkdir /tmp/amlimg
-        fi
+         if [ ! -d "/tmp/amlimg" ];then
+           mkdir /tmp/amlimg
+         fi
 
 
         if [ ! -f "output/amlimg/AmlImg" ];then
