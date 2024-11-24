@@ -79,7 +79,7 @@ jobs:
 
           prefix=$(ls output/images/*.img | sed 's/\.img$//')
           burnimg=${prefix}.burn.img
-          ./AmlImg pack $burnimg output/amlimg/
+          ./output/amlimg/AmlImg pack $burnimg output/amlimg/
 
       - name: Hash and compress images
         run: |
