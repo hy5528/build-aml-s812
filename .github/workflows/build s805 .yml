@@ -10,6 +10,17 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+ 
+    - name: Get Latest Tag
+      id: get_tag
+      run: |
+        latest_tag=$(git describe --tags `git rev-list --tags --max-count=1`)
+        echo "::set-output name=tag::$latest_tag"
+    - name: Print Latest Tag
+      run: echo "Latest Tag: ${{ steps.get_tag.outputs.tag }}"
+      
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
