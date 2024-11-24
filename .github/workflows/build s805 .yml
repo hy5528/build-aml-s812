@@ -93,7 +93,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.RELEASE }}-${{ matrix.BRANCH }}-${{ matrix.TYPE == 'desktop' && matrix.DESKTOP_ENVIRONMENT || matrix.TYPE }}
-          path: output/images/*
+          path: s805-armbian-build/output/images/*
 
       - name: Generate release informations
         run: |
@@ -108,6 +108,6 @@ jobs:
           append_body: true
           body_path: Release.md
           files: |
-            output/images/*
+            s805-armbian-build/output/images/*
     
 
