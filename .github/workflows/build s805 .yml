@@ -38,7 +38,7 @@ jobs:
           sudo apt install img2simg
 
           if [ ! -d "output/amlimg" ];then
-           sudo mkdir output/amlimg
+            sudo mkdir output/amlimg
           fi
 
 
@@ -54,7 +54,7 @@ jobs:
 
         if [ ! -f "output/amlimg/eMMC.burn.img" ];then
           sudo curl -L -o output/amlimg/eMMC.burn.img https://github.com/hzyitc/u-boot-onecloud/releases/download/build-20221028-0940/eMMC.burn.img
-         fi
+        fi
 
       - name: Extract boot and rootfs partitions
         run: |
