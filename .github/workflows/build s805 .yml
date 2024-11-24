@@ -48,7 +48,7 @@ jobs:
           echo "::endgroup::"
 
           echo "::group::Unpack"
-          ./AmlImg unpack ./uboot.img burn/
+          ./AmlImg unpack ./eMMC.burn.img burn/
           echo "::endgroup::"
 
       - name: Extract boot and rootfs partitions
