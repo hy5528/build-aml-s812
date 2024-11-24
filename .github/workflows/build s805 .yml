@@ -66,6 +66,7 @@ jobs:
 
       - name: Generate burn image
         run: |
+          cd s805-armbian-build
           echo -n "sha1sum $(sha1sum output/amlimg/boot.simg | awk '{print $1}')" >output/amlimg/boot.VERIFY
           echo -n "sha1sum $(sha1sum output/amlimg/rootfs.simg | awk '{print $1}')" >output/amlimg/rootfs.VERIFY
 
@@ -82,6 +83,7 @@ jobs:
 
       - name: Hash and compress images
         run: |
+          cd s805-armbian-build
           for f in output/images/*.img; do
             sha256sum "$f" | tee -a sha256sum
             xz --threads=0 --compress "$f"
