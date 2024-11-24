@@ -70,7 +70,7 @@ jobs:
           echo -n "sha1sum $(sha1sum output/amlimg/boot.simg | awk '{print $1}')" >output/amlimg/boot.VERIFY
           echo -n "sha1sum $(sha1sum output/amlimg/rootfs.simg | awk '{print $1}')" >output/amlimg/rootfs.VERIFY
 
-          cat <<EOF >>burn/commands.txt
+          cat <<EOF >>output/images/commands.txt
           PARTITION:boot:sparse:boot.simg
           VERIFY:boot:normal:boot.VERIFY
           PARTITION:rootfs:sparse:rootfs.simg
