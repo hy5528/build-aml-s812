@@ -61,12 +61,13 @@ jobs:
           sudo img2simg ${loop}p1 output/amlimg/boot.simg
           sudo img2simg ${loop}p2 output/amlimg/rootfs.simg
           sudo losetup -d $loop
-          sudo chown $(id -u):$(id -g) -R burn/
+          sudo chown $(id -u):$(id -g) -R output/amlimg/
+    
 
       - name: Generate burn image
         run: |
-          echo -n "sha1sum $(sha1sum burn/boot.simg | awk '{print $1}')" >burn/boot.VERIFY
-          echo -n "sha1sum $(sha1sum burn/rootfs.simg | awk '{print $1}')" >burn/rootfs.VERIFY
+          echo -n "sha1sum $(sha1sum output/amlimg/boot.simg | awk '{print $1}')" >output/amlimg/boot.VERIFY
+          echo -n "sha1sum $(sha1sum output/amlimg/rootfs.simg | awk '{print $1}')" >output/amlimg/rootfs.VERIFY
 
           cat <<EOF >>burn/commands.txt
           PARTITION:boot:sparse:boot.simg
