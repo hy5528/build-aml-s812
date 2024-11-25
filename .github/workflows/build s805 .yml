@@ -96,13 +96,13 @@ jobs:
           name: ${{ matrix.RELEASE }}-${{ matrix.BRANCH }}-${{ matrix.TYPE == 'desktop' && matrix.DESKTOP_ENVIRONMENT || matrix.TYPE }}
           path: s805-armbian-build/output/images/*
 
-       - name: 生成发布标签
-         id: tag
-         if: steps.organize.outputs.status == 'success' && github.event.inputs.upload_release == 'true' && !cancelled()
-         run: |
-           echo "release_tag=$(date +"%Y.%m.%d-%H%M")-22.11-${{ github.event.inputs.target }}" >> $GITHUB_OUTPUT
-           touch Release.md
-           echo "status=success" >> $GITHUB_OUTPUT
+     - name: 生成发布标签
+        id: tag
+        if: steps.organize.outputs.status == 'success' && github.event.inputs.upload_release == 'true' && !cancelled()
+        run: |
+          echo "release_tag=$(date +"%Y.%m.%d-%H%M")-22.11-${{ github.event.inputs.target }}" >> $GITHUB_OUTPUT
+          touch Release.md
+          echo "status=success" >> $GITHUB_OUTPUT
 
       - name: Upload to release
         uses: softprops/action-gh-release@v1
