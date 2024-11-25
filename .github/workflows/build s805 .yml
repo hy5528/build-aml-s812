@@ -62,8 +62,6 @@ jobs:
           sudo img2simg ${loop}p1 output/amlimg/boot.simg
           sudo img2simg ${loop}p2 output/amlimg/rootfs.simg
           sudo losetup -d $loop
-          sudo chown $(id -u):$(id -g) -R output/amlimg/
-    
 
       - name: Generate burn image
         run: |
