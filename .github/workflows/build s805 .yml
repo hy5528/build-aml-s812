@@ -27,61 +27,16 @@ jobs:
           
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=codebase-on-offical https://github.com/hy5528/armbian-build-s805
+          git clone --depth=1 --branch=master https://github.com/hy5528/s805-armbian-build
       - name: Build for aml-s805
         run: |
-          cd armbian-build-s805
+          cd s805-armbian-build
           sudo ./compile.sh  BOARD=aml-s805 BRANCH=current RELEASE=buster BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
-          sudo chown $(id -u):$(id -g) -R output/
-
-      - name: Install Dependents
-        run: |
-          cd armbian-build-s805
-          sudo apt install img2simg
-
-          sudo mkdir output/amlimg
-
-          mkdir /tmp/amlimg
-      - name: Download AmlImg
-        run: | 
-          cd armbian-build-s805
-          sudo curl -L -o output/amlimg/AmlImg https://github.com/hzyitc/AmlImg/releases/download/v0.3.1/AmlImg_v0.3.1_linux_amd64
-          sudo chmod +x output/amlimg/AmlImg
-      - name: Download and unpack the latest u-boot
+          
+      - name: burn image
         run: |
           cd s805-armbian-build
-          sudo curl -L -o output/amlimg/eMMC.burn.img https://github.com/hzyitc/u-boot-onecloud/releases/download/build-20221028-0940/eMMC.burn.img
-
-      - name: Extract boot and rootfs partitions
-        run: |
-          cd armbian-build-s805
-          diskimg=$(ls output/images/*.img) 
-          loop=$(losetup -f)
-          sudo ./output/amlimg/AmlImg unpack output/amlimg/eMMC.burn.img output/amlimg
-          sudo losetup  --show --partscan $loop $diskimg
-          sudo img2simg ${loop}p1 output/amlimg/boot.simg
-          sudo img2simg ${loop}p2 output/amlimg/rootfs.simg
-          sudo losetup -d $loop
-
-      - name: Generate burn image
-        run: |
-          cd armbian-build-s805
-          cat <<EOF >output/amlimg/commands.txt
-          USB:DDR:normal:0.DDR.USB
-          USB:UBOOT_COMP:normal:1.UBOOT_COMP.USB
-          ini:aml_sdc_burn:normal:2.aml_sdc_burn.ini
-          conf:platform:normal:3.platform.conf
-          PARTITION:bootloader:normal:4.bootloader.PARTITION
-          PARTITION:resource:normal:6.resource.PARTITION
-          PARTITION:boot:sparse:boot.simg
-          PARTITION:rootfs:sparse:rootfs.simg
-          EOF
-          sudo rm ./output/amlimg/5.bootloader.VERIFY ./output/amlimg/7.resource.VERIFY
-
-          prefix=$(ls output/images/*.img | sed 's/\.img$//')
-          burnimg=$diskimg.burn.img
-          sudo ./output/amlimg/AmlImg pack $burnimg output/amlimg/
-          echo "complete! File:$burnimg"
+          sudo ./lib/burnimg-pack.sh output/images/*.img
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
