@@ -94,7 +94,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.RELEASE }}-${{ matrix.BRANCH }}-${{ matrix.TYPE == 'desktop' && matrix.DESKTOP_ENVIRONMENT || matrix.TYPE }}
-          path: s805-armbian-build/output/*
+          path: s805-armbian-build/output/images/
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
@@ -114,6 +114,6 @@ jobs:
           append_body: true
           body_path: Release.md
           files: |
-            s805-armbian-build/output/*
+            s805-armbian-build/output/images/
     
 
