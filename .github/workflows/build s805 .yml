@@ -86,7 +86,7 @@ jobs:
           echo "complete! File:$burnimg"
 
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: built-images
           path: s805-armbian-build/output/images/
