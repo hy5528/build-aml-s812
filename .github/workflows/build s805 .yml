@@ -27,11 +27,11 @@ jobs:
           
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=master https://github.com/wwhai/s805-armbian-build
+          git clone --depth=1 --branch=master https://github.com/hy5528/s805-armbian-build
       - name: Build for aml-s805
         run: |
           cd s805-armbian-build
-          sudo ./compile.sh  BOARD=aml-s805 BRANCH=current RELEASE=bullseye BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
+          sudo ./compile.sh  BOARD=aml-s805 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
           
 
       - name: Upload artifacts
