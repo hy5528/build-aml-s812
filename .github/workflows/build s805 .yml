@@ -81,39 +81,13 @@ jobs:
           prefix=$(ls output/images/*.img | sed 's/\.img$//')
           burnimg=${prefix}.burn.img
           sudo ./output/amlimg/AmlImg pack $burnimg output/amlimg/
-
-      - name: Hash and compress images
-        run: |
-          cd s805-armbian-build
-          for f in output/images/*.img; do
-            sha256sum "$f" | tee -a sha256sum
-            xz --threads=0 --compress "$f"
-          done
+          echo "complete! File:$burnimg"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v3
         with:
           name: built-images
           path: s805-armbian-build/output/images/
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          draft: false
-          prerelease: false  
 
-
-      - name: Upload to release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ env.TAG }}
-          append_body: true
-          body_path: Release.md
-          files: |
-            s805-armbian-build/output/images/
     
 
