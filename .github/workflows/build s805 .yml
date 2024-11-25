@@ -27,16 +27,16 @@ jobs:
           
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=master https://github.com/hy5528/s805-armbian-build
+          git clone --depth=1 --branch=codebase-on-offical https://github.com/soulteary/armbian-build-s805
       - name: Build for aml-s805
         run: |
-          cd s805-armbian-build
-          sudo ./compile.sh  BOARD=aml-s805 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
+          cd armbian-build-s805
+          sudo ./compile.sh  BOARD=aml-s805 BRANCH=current RELEASE=buster BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
           sudo chown $(id -u):$(id -g) -R output/
 
       - name: Install Dependents
         run: |
-          cd s805-armbian-build
+          cd armbian-build-s805
           sudo apt install img2simg
 
           sudo mkdir output/amlimg
@@ -44,7 +44,7 @@ jobs:
           mkdir /tmp/amlimg
       - name: Download AmlImg
         run: | 
-          cd s805-armbian-build
+          cd armbian-build-s805
           sudo curl -L -o output/amlimg/AmlImg https://github.com/hzyitc/AmlImg/releases/download/v0.3.1/AmlImg_v0.3.1_linux_amd64
           sudo chmod +x output/amlimg/AmlImg
       - name: Download and unpack the latest u-boot
@@ -54,7 +54,7 @@ jobs:
 
       - name: Extract boot and rootfs partitions
         run: |
-          cd s805-armbian-build
+          cd armbian-build-s805
           diskimg=$(ls output/images/*.img) 
           loop=$(losetup -f)
           sudo ./output/amlimg/AmlImg unpack output/amlimg/eMMC.burn.img output/amlimg
@@ -67,7 +67,7 @@ jobs:
 
       - name: Generate burn image
         run: |
-          cd s805-armbian-build
+          cd armbian-build-s805
           cat <<EOF >output/amlimg/commands.txt
           USB:DDR:normal:0.DDR.USB
           USB:UBOOT_COMP:normal:1.UBOOT_COMP.USB
@@ -89,7 +89,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: built-images
-          path: s805-armbian-build/output/images/
+          path: armbian-build-s805/output/images/
 
     
 
