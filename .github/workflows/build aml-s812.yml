@@ -20,7 +20,7 @@ jobs:
           remove-android: 'true'
       - name: Checkout armbian/build
         run: |
-          git clone --depth=1 --branch=master https://github.com/hy5528/Build-Armbian
+          git clone --depth=1 --branch=main https://github.com/hy5528/Build-Armbian
       - name: Build for aml-s812
         run: |
           cd Build-Armbian
