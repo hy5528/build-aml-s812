@@ -28,7 +28,7 @@ jobs:
       - name: Build burn for aml-s805
         run: |
           cd s805-armbian-build
-          sudo apt install img2simg
+          sudo apt-get install -y img2simg
           sudo mkdir output/amlimg
           mkdir /tmp/amlimg
           sudo curl -L -o output/amlimg/AmlImg https://github.com/hzyitc/AmlImg/releases/download/v0.3.1/AmlImg_v0.3.1_linux_amd64
