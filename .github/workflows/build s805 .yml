@@ -29,6 +29,7 @@ jobs:
         run: |
           cd s805-armbian-build
           sudo apt-get install -y img2simg
+          sudo chmod -R 777 output
           sudo mkdir output/amlimg
           mkdir /tmp/amlimg
           sudo curl -L -o output/amlimg/AmlImg https://github.com/hzyitc/AmlImg/releases/download/v0.3.1/AmlImg_v0.3.1_linux_amd64
