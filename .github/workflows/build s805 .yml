@@ -1,4 +1,4 @@
-name: build s805 image
+name: build aml-s805 image
 
 on:
   push:
@@ -10,7 +10,6 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
@@ -19,26 +18,21 @@ jobs:
           swap-size-mb: 2266
           remove-dotnet: 'true'
           remove-android: 'true'
-     
       - name: Checkout armbian/build
         run: |
           git clone --depth=1 --branch=master https://github.com/hy5528/s805-armbian-build
       - name: Build for aml-s805
         run: |
           cd s805-armbian-build
-          sudo ./compile.sh  BOARD=aml-s805 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
-  
-      - name: Build burn for aml-s812
-         run: |
-           cd Build-Armbian
-           sudo chmod +x output
-           sudo ./userpatches/burnimg-pack.sh output/images/*.img   
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
+          sudo ./compile.sh BOARD=aml-s805 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
+     
+      - name: Build burn for aml-s805
+        run: |
+          cd s805-armbian-build
+          sudo chmod +x output
+          sudo ./userpatches/burnimg-pack.sh output/images/*.img
+          
+      - uses: actions/upload-artifact@v4
         with:
           name: built-images
-          path: s805-armbian-build/output/images/
-
-    
-
+          path: Build-Armbian/output/images/
