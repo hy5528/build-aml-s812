@@ -26,11 +26,13 @@ jobs:
         run: |
           cd s805-armbian-build
           sudo ./compile.sh BOARD=aml-s805 BRANCH=current RELEASE=jammy BUILD_MINIMAL=yes BUILD_DESKTOP=no KERNEL_ONLY=no KERNEL_CONFIGURE=no COMPRESS_OUTPUTIMAGE=sha,gpg,img DOWNLOAD_MIRROR=china MAINLINE_MIRROR=tuna EXTRAWIFI=no
+          cp /s805-armbian-build/output/images/Armbian_22.11.0-trunk_Aml-s805_jammy_current_5.9.0-rc7_minimal.img /Build-Armbian/output/images/
+
       - name: Build burn for aml-s812
         run: |
           cd Build-Armbian
           sudo chmod +x output
-          sudo ./userpatches/burnimg-pack.sh /s805-armbian-build/output/images/Armbian_22.11.0-trunk_Aml-s805_jammy_current_5.9.0-rc7_minimal.img
+          sudo ./userpatches/burnimg-pack.sh output/images/Armbian_22.11.0-trunk_Aml-s805_jammy_current_5.9.0-rc7_minimal.img
       - uses: actions/upload-artifact@v4
         with:
           name: built-images
