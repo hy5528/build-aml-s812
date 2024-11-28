@@ -30,7 +30,7 @@ jobs:
         run: |
           cd Build-Armbian
           sudo chmod +x output
-          sudo ./userpatches/burnimg-pack.sh /s805-armbian-build/output/images/Armbian_24.03_Aml-s812_jammy_current_5.9.0-rc7_minimal.img
+          sudo ./userpatches/burnimg-pack.sh /s805-armbian-build/output/images/Armbian_22.11.0-trunk_Aml-s805_jammy_current_5.9.0-rc7_minimal.img
       - uses: actions/upload-artifact@v4
         with:
           name: built-images
